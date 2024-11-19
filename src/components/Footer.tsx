@@ -1,7 +1,8 @@
 export default function Footer() {
+    const CopyRight: string = "All rights reserved";
     return (
       <footer>
-          <p>Copy@right</p>
+          <p>{CopyRight}</p>
       </footer>
     );
   }

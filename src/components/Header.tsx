@@ -1,19 +1,15 @@
 export default function Header () { 
     
     let style : Record<string,string> = {
-        color: 'purple'
+        color: 'purple',
+        backgroundColor: 'lightblue'
     }
 
-    style = {       
-    
-        color: 'purple',
-        backgroundColor: 'lightblue',
-        padding: '10px',
-    }
+    const title : string = 'Hello World 2024! - Introduction a JSX avec ouitube_v2';
     
     return (
         <header style={style}>
-            <h1>Hello World 2024! - Introduction a JSX avec ouitube_v2</h1>
+            <h1>{title}</h1>
         </header>
     );
 }   
