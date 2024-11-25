@@ -6,11 +6,15 @@ import Content from './components/Content';
 import Footer from './components/Footer';
 
 function App() {
+  const title: string = 'Sabaidee Touny';
+  const copyright: string = "All rights reserved";
   return (
     <div className="App">
       <Header />
       <Content />
-      <Footer />
+      <Footer title={title} copyright={copyright}/>
+      {/* <Footer title={title}/> */}
+      {/* <Footer /> */}
     </div>
   );
 }

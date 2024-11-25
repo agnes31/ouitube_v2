@@ -29,7 +29,7 @@ export default function Content() {
     document.title = `Vous avez cliqué ${clickCount} fois`;
     
     //     const content = document.querySelector('.content');
-    // console.log(content);
+    console.log(clickCount);
     // setClickCount(clickCount + 1)
 
     // },[]);
