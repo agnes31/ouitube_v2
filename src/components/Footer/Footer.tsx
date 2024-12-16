@@ -7,7 +7,7 @@
 import React, { FC, useEffect } from 'react';
 import './Footer.css';
 
-
+// 
 interface FooterProps {
  
 }

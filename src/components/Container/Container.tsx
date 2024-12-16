@@ -13,7 +13,7 @@ interface ContainerProps {
 
 }
 
-
+  
 const Container: FC<ContainerProps> = () => {
 
 
@@ -26,10 +26,53 @@ const Container: FC<ContainerProps> = () => {
   })
 
   return (
-    <div className="Container">
-      Header Component
+    <div className="container py-2">
+      <button className="btn btn-primary">
+        Add Video
+      </button>
+      <div className="video-list py-1">
+        <table className="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Title</th>
+              <th scope="col">Poster</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Formation React JS</td>
+              <td>
+                <img width={80} src="assets/images/Agnes.jpg" alt="Formation React" />
+              </td>
+              <td>
+                <button className="btn btn-success m-1">View</button>
+                <button className="btn btn-primary m-1">Edit</button>
+                <button className="btn btn-danger m-1">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">2</th> <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+            <th scope="row">3</th>
+              <td>Nana</td>
+              <td>@twitter</td>
+              <td>Larry the Bird</td>
+              {/* <th scope="row">3</th>
+              <td colSpan="2">Larry the Bird</td>
+              <td>@twitter</td> */}
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
+  
 }
 
 export default Container;

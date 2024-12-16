@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header/Header';
 import Container from './components/Container/Container';
-import Footer from './components/Footer/Footer';
+// import Footer from './components/Footer/Footer';
 
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
     <div className="App">
       <Header />
       <Container />
-      <Footer />
+      {/* <Footer /> */}
 
     </div>
   );

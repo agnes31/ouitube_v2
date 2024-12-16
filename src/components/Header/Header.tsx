@@ -19,6 +19,7 @@ const Header: FC<HeaderProps> = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
+    
     const runLocalData = async () => {
 
     }
@@ -27,8 +28,15 @@ const Header: FC<HeaderProps> = () => {
 
   return (
     <div className="Header">
-      Component Header
-
+      <nav className="navbar bg-body-tertiary shadow-lg">
+        <div className="container-fluid">
+          <a className="navbar-brand">Ouitube</a>
+          <form className="d-flex" role="search">
+            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+            <button className="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
     </div>
   );
 }
