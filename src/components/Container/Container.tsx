@@ -4,8 +4,10 @@
   App Name : E-commerce with React.Js
   Created At : 04/03/2024 16:53:35
 */
-import React, { FC, useEffect } from 'react';
+import React, { FC, useState, useEffect } from 'react';
+import VideoFormModal from '../VideoFormModal/VideoFormModal';
 import './Container.css';
+// import { title } from 'process';
 
 
 
@@ -17,19 +19,27 @@ interface ContainerProps {
 const Container: FC<ContainerProps> = () => {
 
 
+  const [displayModal, setDisplayModal] = useState<boolean>(false) // ne pas afficher par defaut le modal - Lorsque va valoir true
+
   useEffect(() => {
     window.scrollTo(0, 0)
     const runLocalData = async () => {
 
-    }
-    runLocalData()
-  })
+      // Logique asynchrone ici
+    };
+    runLocalData();
+  }, []); // Ajout du tableau de dépendances vide
+
+  const hideModal = () => {
+    setDisplayModal(false);
+  };
 
   return (
     <div className="container py-2">
-      <button className="btn btn-primary">
+      <button className="btn btn-primary" onClick={()=>setDisplayModal(true)}>
         Add Video
       </button>
+      {displayModal && <VideoFormModal hideModal={hideModal}/>}
       <div className="video-list py-1">
         <table className="table table-bordered">
           <thead>
