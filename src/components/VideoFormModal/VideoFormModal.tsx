@@ -6,7 +6,7 @@
 */
 import React, { FC, useEffect } from 'react';
 // import './VideoFormModal.css';
-// import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 
 
 interface VideoFormModalProps {
@@ -17,7 +17,6 @@ interface VideoFormModalProps {
 const VideoFormModal: FC<VideoFormModalProps> = ({hideModal}) => {
 
 
-
   useEffect(() => {
     window.scrollTo(0, 0)
     const runLocalData = async () => {
@@ -25,10 +24,30 @@ const VideoFormModal: FC<VideoFormModalProps> = ({hideModal}) => {
     }
     runLocalData()
   })
+  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Neque nesciunt excepturi, illum odio tempore voluptates fugit voluptatibus expedita doloremque incidunt cupiditate beatae optio eligendi quas repellat? Sit nisi animi obcaecati.</p>
 
   return (
-    <div>
-    test blabla
+    <div className='VideoFormModal'>
+    <Modal show={true} size='lg'>
+      <Modal.Header >
+        <Modal.Title>
+          Video Form
+        </Modal.Title>
+        <Button className='btn-close' onClick={hideModal}></Button>
+      </Modal.Header>
+      <Modal.Body>
+        <p>Modal body text goes here.</p>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="primary" onClick={hideModal}>
+          Cancel
+        </Button>
+        <Button variant="success"  onClick={hideModal}>
+          Save Video
+        </Button>
+      </Modal.Footer>
+    </Modal>
+
   </div>
 
     
