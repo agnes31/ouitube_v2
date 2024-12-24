@@ -24,7 +24,6 @@ const VideoFormModal: FC<VideoFormModalProps> = ({hideModal}) => {
     }
     runLocalData()
   })
-  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Neque nesciunt excepturi, illum odio tempore voluptates fugit voluptatibus expedita doloremque incidunt cupiditate beatae optio eligendi quas repellat? Sit nisi animi obcaecati.</p>
 
   return (
     <div className='VideoFormModal'>
@@ -36,7 +35,36 @@ const VideoFormModal: FC<VideoFormModalProps> = ({hideModal}) => {
         <Button className='btn-close' onClick={hideModal}></Button>
       </Modal.Header>
       <Modal.Body>
-        <p>Modal body text goes here.</p>
+        <form action="">
+          <div className="form-group">
+            <label htmlFor="title">Title</label>
+            <input type="text" name='title' className="form-control" />
+          </div>
+          <div className="form-group">
+            <label htmlFor="description">Description</label>
+            <textarea name='description' id="description" className="form-control" ></textarea>
+          </div>
+          <div className="form-group">
+            <label htmlFor="image">Image (poster)</label>
+            <input type="file" name='poster' className="form-control" />
+          </div>
+          <div className="form-group">
+            <label htmlFor="video">Video</label>
+            <input type="file" name='video' className="form-control" />
+          </div>
+          <div className="form-group">
+            <label htmlFor="categories">Categories :</label>
+            <select name="categories" id="categories" className="form-control">
+              <option value="1">Category 1</option>
+              <option value="2">Category 2</option>
+              <option value="3">Category 3</option>
+            </select>
+          </div>
+          <div className="form-check form-switch">
+              <input className="form-check-input" type="checkbox" role="switch" id="isAvailable" defaultChecked />
+              <label htmlFor="isAvailable">Is Avaible</label>
+          </div>
+        </form>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="primary" onClick={hideModal}>

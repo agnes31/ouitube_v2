@@ -19,8 +19,8 @@ interface ContainerProps {
 const Container: FC<ContainerProps> = () => {
 
 
-  const [displayModal, setDisplayModal] = useState<boolean>(false) // ne pas afficher par defaut le modal - Lorsque va valoir true
-
+  const [displayModal, setDisplayModal] = useState<boolean>(true) // ne pas afficher par defaut le modal - Lorsque va valoir true
+//changer l'affichage du modal  true reste ouvert - false ferme
   useEffect(() => {
     window.scrollTo(0, 0)
     const runLocalData = async () => {
@@ -31,7 +31,7 @@ const Container: FC<ContainerProps> = () => {
   }, []); // Ajout du tableau de dépendances vide
 
   const hideModal = () => {
-    setDisplayModal(false);
+    setDisplayModal(true); //changer l'affichage du modal  true reste ouvert - false ferme
   };
 
   return (
