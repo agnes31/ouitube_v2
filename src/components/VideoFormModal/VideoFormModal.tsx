@@ -4,9 +4,10 @@
   App Name : E-commerce with React.Js
   Created At : 04/03/2024 17:17:14
 */
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect,useState } from 'react';
 // import './VideoFormModal.css';
 import { Button, Modal } from 'react-bootstrap';
+import { Video } from '../../models/Video';
 
 
 interface VideoFormModalProps {
@@ -16,6 +17,16 @@ interface VideoFormModalProps {
 
 const VideoFormModal: FC<VideoFormModalProps> = ({hideModal}) => {
 
+  const [formData, setFormData] = useState<Video>({ // vient de Models/Video
+    title: '',
+    description: '',
+    poster: null as File | null,
+    link: null as File | null,
+    category: '',
+    isAvailable: true
+  })
+
+
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -24,6 +35,14 @@ const VideoFormModal: FC<VideoFormModalProps> = ({hideModal}) => {
     }
     runLocalData()
   })
+  const handleInputChange = (event:any ) => {
+    const {name, value, type,files, checked} = event.target;
+    // setFormData({
+    //   ...formData,
+    //   [name]: type === 'checkbox' ? checked : type === 'file' ? files?.[0] : value,
+    // });
+  
+  }
 
   return (
     <div className='VideoFormModal'>
@@ -38,30 +57,62 @@ const VideoFormModal: FC<VideoFormModalProps> = ({hideModal}) => {
         <form action="">
           <div className="form-group">
             <label htmlFor="title">Title</label>
-            <input type="text" name='title' className="form-control" />
+            <input 
+            value={formData.title} 
+            type="text" 
+            name='title' 
+            className="form-control"
+            onChange={handleInputChange}
+             />
           </div>
           <div className="form-group">
             <label htmlFor="description">Description</label>
-            <textarea name='description' id="description" className="form-control" ></textarea>
+            <textarea name='description' 
+            value={formData.description}
+            id="description" 
+            className="form-control"
+            onChange={handleInputChange} 
+            >
+
+            </textarea>
           </div>
           <div className="form-group">
             <label htmlFor="image">Image (poster)</label>
-            <input type="file" name='poster' className="form-control" />
+            <input type="file" 
+            name='poster' 
+            className="form-control"
+            onChange={handleInputChange} 
+            />
           </div>
           <div className="form-group">
             <label htmlFor="video">Video</label>
-            <input type="file" name='video' className="form-control" />
+            <input type="file" 
+            name='link' 
+            className="form-control"
+            onChange={handleInputChange} 
+            />
           </div>
           <div className="form-group">
             <label htmlFor="categories">Categories :</label>
-            <select name="categories" id="categories" className="form-control">
+            <select name="categories" 
+            id="categories" 
+            className="form-control"
+            value={formData.category}
+            onChange={handleInputChange}
+            >
               <option value="1">Category 1</option>
               <option value="2">Category 2</option>
               <option value="3">Category 3</option>
             </select>
           </div>
           <div className="form-check form-switch">
-              <input className="form-check-input" type="checkbox" role="switch" id="isAvailable" defaultChecked />
+              <input className="form-check-input" type="checkbox" role="switch" 
+              id="isAvailable"
+              checked={formData.isAvailable}// ouvert par default
+              // defaultChecked 
+              onChange={handleInputChange} 
+              // defaultChecked 
+              />
               <label htmlFor="isAvailable">Is Avaible</label>
           </div>
         </form>

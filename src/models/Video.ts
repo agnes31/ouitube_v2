@@ -3,12 +3,12 @@ import { Category } from "./Category";
 export interface Video {
   title: string;
   description: string;
-  poster: string;
-  link: string;
-  author: string;
-  category: Array<Category>; //video de cathégorie
-  isAvailable: boolean;
-  created_at: Date;
-  updated_at: Date;
+  poster: File | null | string;
+  link: File | null | string;
+  author?: string;
+  category: string;
+  isAvailable: true;
+  created_at?: Date; //? = optionnel
+  updated_at?: Date; //? = optionnel
   
 }
