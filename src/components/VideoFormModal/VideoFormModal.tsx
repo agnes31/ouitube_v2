@@ -35,8 +35,22 @@ const VideoFormModal: FC<VideoFormModalProps> = ({hideModal}) => {
     }
     runLocalData()
   })
-  const handleInputChange = (event:any ) => {
+
+  const handleInputChange = (event: any ) => {
     const {name, value, type,files, checked} = event.target;
+
+    const newValue: any = formData
+    if(type === "checkbox"){ 
+      newValue[name] = checked;
+    }else if(type === "file"){
+      newValue[name] = files[0];
+    }
+    else{
+      newValue[name] = value;
+    }
+    setFormData(newValue);
+    console.log(formData);
+
     // setFormData({
     //   ...formData,
     //   [name]: type === 'checkbox' ? checked : type === 'file' ? files?.[0] : value,
@@ -58,7 +72,7 @@ const VideoFormModal: FC<VideoFormModalProps> = ({hideModal}) => {
           <div className="form-group">
             <label htmlFor="title">Title</label>
             <input 
-            value={formData.title} 
+            defaultValue={formData.title} 
             type="text" 
             name='title' 
             className="form-control"
@@ -68,7 +82,7 @@ const VideoFormModal: FC<VideoFormModalProps> = ({hideModal}) => {
           <div className="form-group">
             <label htmlFor="description">Description</label>
             <textarea name='description' 
-            value={formData.description}
+            defaultValue={formData.description}
             id="description" 
             className="form-control"
             onChange={handleInputChange} 
@@ -94,10 +108,10 @@ const VideoFormModal: FC<VideoFormModalProps> = ({hideModal}) => {
           </div>
           <div className="form-group">
             <label htmlFor="categories">Categories :</label>
-            <select name="categories" 
+            <select name="category" 
             id="categories" 
             className="form-control"
-            value={formData.category}
+            defaultValue={formData.category}
             onChange={handleInputChange}
             >
               <option value="1">Category 1</option>
@@ -108,7 +122,8 @@ const VideoFormModal: FC<VideoFormModalProps> = ({hideModal}) => {
           <div className="form-check form-switch">
               <input className="form-check-input" type="checkbox" role="switch" 
               id="isAvailable"
-              checked={formData.isAvailable}// ouvert par default
+              name='isAvailable'
+              defaultChecked={formData.isAvailable}// ouvert par default
               // defaultChecked 
               onChange={handleInputChange} 
               // defaultChecked 
