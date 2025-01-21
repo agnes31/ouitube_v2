@@ -1,0 +1,6 @@
+/* VideoFormModal.css */
+.img-small-height {
+    height: auto    ; /* Définir la hauteur souhaitée */
+    width: 100%;   /* Laisser la largeur à 100% */
+    object-fit: cover; /* Pour s'assurer que l'image s'adapte bien */
+  }

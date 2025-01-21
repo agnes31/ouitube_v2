@@ -1,8 +1,11 @@
 
 import React, { FC, useEffect,useState } from 'react';
-// import './VideoFormModal.css';
 import { Button, Modal } from 'react-bootstrap';
 import { Video } from '../../models/Video';
+import { convertFileToLink } from '../../helper/fileHelpers';
+import './VideoFormModal.css';
+
+
 
 
 interface VideoFormModalProps {
@@ -11,6 +14,9 @@ interface VideoFormModalProps {
 
 
 const VideoFormModal: FC<VideoFormModalProps> = ({hideModal}) => {
+
+  const [posterPreview, setPosterPreview] = useState<string>("") 
+  const [videoPreview, setVideoPreview] = useState<string>("") 
 
   const [formData, setFormData] = useState<Video>({ 
     title: '',
@@ -31,13 +37,30 @@ const VideoFormModal: FC<VideoFormModalProps> = ({hideModal}) => {
     runLocalData()
   })
 
-  const handleInputChange = (event: any ) => {
+  const handleInputChange = async (event: any ) => {
     const {name, value, type,files, checked} = event.target;
 
     const newValue: any = formData
+   
     if(type === "checkbox"){ 
       newValue[name] = checked;
-    }else if(type === "file"){
+    } else if(type === "file"){
+      const file = files[0]
+      const link = await convertFileToLink(file)
+      if(name === 'poster'){
+        if(!file.type.startsWith('image/')){
+          return;
+        }
+        setPosterPreview(link)
+      }
+      if(name === 'link'){
+        if (!file.type.startsWith('video/')) {
+        newValue[name] = file;
+        return;
+        }
+        setVideoPreview(link)
+      }
+    
       newValue[name] = files[0];
     }
     else{
@@ -45,6 +68,10 @@ const VideoFormModal: FC<VideoFormModalProps> = ({hideModal}) => {
     }
     setFormData(newValue);
     console.log(formData);
+
+    const errors = formErrors;
+    delete errors[name];
+    setFormErrors({...errors});
 
     // setFormData({
     //   ...formData,
@@ -79,7 +106,10 @@ const VideoFormModal: FC<VideoFormModalProps> = ({hideModal}) => {
     if(!validateForm()){ 
       return;
     }
-    console.log(formData);
+    const video: Video = formData;
+    video.created_at = new Date();
+
+    console.log(video);
   }
 
 
@@ -99,7 +129,7 @@ const VideoFormModal: FC<VideoFormModalProps> = ({hideModal}) => {
             <input 
             defaultValue={formData.title} 
             type="text" 
-            name='title' 
+            name='title'
             className={`form-control ${formErrors.title ? 'is-invalid' : ''}`}
             onChange={handleInputChange}
              />
@@ -119,19 +149,34 @@ const VideoFormModal: FC<VideoFormModalProps> = ({hideModal}) => {
           <div className="form-group">
             <label htmlFor="image">Image (poster)</label>
             <input type="file" 
-            name='poster' 
+            name='poster'
+            accept="image/*"  
             className={`form-control ${formErrors.poster ? 'is-invalid' : ''}`}
             onChange={handleInputChange} 
             />
+            {
+              posterPreview && <div className="preview-image py-2">
+                <img className='img-fluid card img-small-height' src={posterPreview}/>
+              </div>
+            }
+            {/* <div className="preview-image">
+              <img src={posterPreview}/>
+            </div> */}
             {formErrors.poster && <div className='invalid-feedback'>{formErrors.poster}</  div>}
           </div>      
           <div className="form-group">
             <label htmlFor="video">Video</label>
             <input type="file" 
-            name='link' 
+            name='link'
+            accept="video/*"   
             className={`form-control ${formErrors.link ? 'is-invalid' : ''}`}
             onChange={handleInputChange} 
             />
+            {
+              videoPreview && <div className="preview-video py-2">
+                <video className='img-fluid card' controls src={videoPreview} width={'100%'} ></video>
+              </div>
+            }
             {formErrors.link && <div className='invalid-feedback'>{formErrors.link}</  div>}
           </div>
           <div className="form-group">
